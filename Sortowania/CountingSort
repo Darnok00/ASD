@@ -1,0 +1,24 @@
+#sortowanie przez zliczanie
+def countsort(tab, n):
+    K = 0
+    for i in range(0, n):
+        if K < tab[i]:
+            K = tab[i]
+    tab1 = [0] * (K+1)
+    tab2 = [0] * n
+    for i in range(0, n):
+        tab1[tab[i]] += 1
+    for i in range(1, K+1):
+        tab1[i] += tab1[i - 1]
+    for i in range(n - 1, -1, -1):
+        tab2[tab1[tab[i]] - 1] = tab[i]
+        tab1[tab[i]] -= 1
+    for i in range(0, n):
+        tab[i] = tab2[i]
+n = int(input("Podaj ilosc liczb ziom: "))
+tab = [0]*n
+for i in range(0,n):
+    tab[i]=int(input())
+countsort(tab,n)
+for i in range(0,n):
+    print(tab[i])
